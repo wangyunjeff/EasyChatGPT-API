@@ -1,2 +1,32 @@
 # EasyChatGPT-API
-用python和flask简单实现调用chatGPT的API
+用python和flask简单实现调用chatGPT的API，支持上下文回复、latex公式渲染、和代码高亮。
+**note: 该项目所有代码包括这个README皆由ChatGPT实现**
+
+EasyChatGPT-API 是一个基于 [OpenAI GPT-3.5](https://openai.com/)（也就是ChatGPT） 模型的简单聊天机器人 API。使用 Python 的 Flask 框架编写，可以通过 API 轻松调用。
+
+## 安装
+
+1.  克隆仓库到本地
+`git clone https://github.com/<YOUR_GITHUB_USERNAME>/EasyChatGPT-API.git` 
+
+2.  进入项目目录
+`cd EasyChatGPT-API` 
+
+3.  安装依赖
+`pip install -r requirements.txt` 
+
+4.  运行项目
+`python app.py` 
+
+## API 使用说明
+
+-   `/get_response`：用于获取聊天机器人的回复。需要以 POST 请求发送用户输入，并返回聊天机器人的回复。
+-   `/reset`：用于重置聊天历史记录。
+
+## 代码说明
+
+-   `app.py`：Flask 项目主文件，包含了 API 接口的定义和聊天机器人的实现。
+
+## 许可证
+
+EasyChatGPT-API 使用 MIT 许可证。请参阅 [LICENSE](https://chat.openai.com/chat/LICENSE) 文件了解详情。

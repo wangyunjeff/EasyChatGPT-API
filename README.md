@@ -8,18 +8,23 @@ EasyChatGPT-API 是一个使用 [OpenAI GPT-3.5 API](https://openai.com/)（也�
 ## 安装
 
 1.  克隆仓库到本地
+
 `git clone https://github.com/<YOUR_GITHUB_USERNAME>/EasyChatGPT-API.git` 
 
 2.  进入项目目录
+
 `cd EasyChatGPT-API` 
 
 3.  安装依赖
+
 `pip install flask markupsafe openai markdown` 
 
 4. 在 'app.py' 中设置你自己的 OpenAI APE key
+
 `openai.api_key = 'YOUR_API_KEY'` 
 
 5.  运行项目
+
 `python app.py` 
 
 

@@ -1,0 +1,2 @@
+# EasyChatGPT-API
+用python和flask简单实现调用chatGPT的API

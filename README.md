@@ -1,6 +1,8 @@
 # EasyChatGPT-API
 **note: 该项目所有代码（包括这个README）皆由ChatGPT实现**
 
+项目在线体验地址：http://wangyunjeff.pythonanywhere.com/
+
 用python和flask简单实现调用chatGPT的API，支持上下文回复、latex公式渲染、和代码高亮。
 
 EasyChatGPT-API 是一个使用 [OpenAI GPT-3.5 API](https://openai.com/)（也就是ChatGPT） 实现的简单聊天机器人 。使用 Python 的 Flask 框架编写。

@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ChatGPT Demo</title>
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/default.min.css">
+    <title>本项目只提供学习交流</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+<!--    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/default.min.css">-->
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
+
     <style>
         .message {
-            margin: 10px;
-            padding: 10px;
-            border-radius: 5px;
-            font-size: 16px;
-            line-height: 1.5;
-            max-width: 70%;
+           color: black;
+            font-family: monospace;
+            font-size: 15px;
+            text-align: left;
+            line-height: 30px;
         }
         .user-message {
             background-color: #f3f3f3;
@@ -31,20 +32,31 @@
             border: 1px solid #ccc;
             margin: 10px 0;
         }
+        #user-input-text {
+            width: 87%;
+            border: none;
+            border-bottom: 3px solid #009688;
+            font-family: monospace;
+            font-size: 17px;
+}
     </style>
 </head>
 <body>
-    <h1>ChatGPT Demo</h1>
+    <h1>🤖陕西智慧助手</h1>
+    <h3 id="user-id">来啦，有撒事你说~😊</h3>
     <div id="chatbox">
         <div id="messages"></div>
         <div id="user-input">
             <form id="user-form">
-                <input type="text" id="user-input-text" placeholder="Say something...">
-                <input type="submit" value="Send">
+                <input type="text" id="user-input-text" placeholder="在此输入消息">
+                <input type="submit" value="发送">
             </form>
-            <button id="reset-button">Reset Conversation</button> <!-- 添加了一个 Reset Conversation 的按钮 -->
+            <button id="reset-button">新的对话</button> <!-- 添加了一个 Reset Conversation 的按钮 -->
         </div>
     </div>
+    <footer>
+    <p>Made by <a href="https://github.com/wangyunjeff">wangyunjeff</a> | <a href="https://github.com/wangyunjeff/EasyChatGPT-API">Soure Code</a> </p>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
@@ -53,11 +65,28 @@
                 event.preventDefault();
                 var user_input = $('#user-input-text').val();
                 $('#messages').append('<div class="message user-message">' + user_input + '</div>');
+                $('#messages').append('<div class="message bot-message">正在思考...</div>');
+
+// $.ajax({
+//     type: 'POST',
+//     url: '/get_response',
+//     data: { user_input: user_input },
+//     success: function(response) {
+//         // 隐藏加载动画
+//
+//
+//         // 显示 AI 的回复
+//         $('#messages').append('<div class="message bot-message">' + response + '</div>');
+//
+//         // ... 其他代码
+//     }
+// });
                 $.ajax({
                     type: 'POST',
                     url: '/get_response',
                     data: { user_input: user_input },
                     success: function(response) {
+                        $('.bot-message:contains("正在思考...")').remove();
                         $('#messages').append('<div class="message bot-message">' + response + '</div>');
                         $('#messages').animate({ scrollTop: $('#messages').prop("scrollHeight") }, 1000);
                         $('pre code').each(function(i, block) {
@@ -67,16 +96,42 @@
                 });
                 $('#user-input-text').val('');
             });
+            // $('#reset-button').click(function() {
+            //     $.ajax({
+            //         type: 'GET',
+            //         url: '/reset',
+            //         success: function(response) {
+            //             $('#messages').empty();
+            //         }
+            //     });
+            // });
+        });
+    </script>
+    <script>
+        $(function() {
+            // 获取并显示user ID
+            $.ajax({
+                type: 'GET',
+                url: '/get_user_id',
+                success: function(response) {
+                    $('#user-id').text('对话 ID: ' + response);
+                }
+            });
+
+            // 点击Reset按钮时重置对话和更新user ID
             $('#reset-button').click(function() {
                 $.ajax({
                     type: 'GET',
                     url: '/reset',
                     success: function(response) {
                         $('#messages').empty();
+                        $('#user-id').text('对话 ID: ' + response);
                     }
                 });
             });
+
+            // ...
         });
-    </script>
+</script>
 </body>
 </html>
